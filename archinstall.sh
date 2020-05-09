@@ -2,7 +2,7 @@
 echo Arch Installer
 
 #Variables
-USERACC="Will"
+USERACC="will"
 DRIVE="sda"
 TIMEZONE="Sydney/Europe"
 
