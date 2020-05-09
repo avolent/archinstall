@@ -3,7 +3,8 @@ echo Arch Installer
 
 #Variables
 USERACC="Will"
-DRIVE="sdX"
+DRIVE="sda"
+TIMEZONE="Sydney/Europe"
 
 #Install Preparation
 ls /sys/firmware/efi/efivars 
@@ -35,6 +36,9 @@ reflector -c "AUS" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 #Installing Arch
 
 mount /dev/sda2 /mnt
-
 pacstrap /mnt base linux linux-firmware vim nano 
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+
+
 
