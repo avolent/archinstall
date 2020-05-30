@@ -16,16 +16,15 @@ else
     exit 
 fi
 echo "Checking network connectivity."
-if ping -c 1 192.168.1.4 &> /dev/null
+if ping -c 1 archlinux.org &> /dev/null
 then   
     echo "Internet Connectivity Working."
 else   
     echo "No Internet Connectivity. Halting script!"
     exit
 fi
-ping archlinux.org
 echo "Setting Time"
-#timedatectl set-ntp true
+timedatectl set-ntp true
 #Drive Preparation
 echo "Preparing drives and creating partitions"
 dd if=/dev/zero of=/dev/$DRIVE  bs=512  count=1
