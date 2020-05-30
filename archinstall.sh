@@ -7,9 +7,22 @@ TIMEZONE="Sydney/Europe"
 #Install Preparation
 echo "Starting Installation"
 echo "Checking EFI"
-#ls /sys/firmware/efi/efivars
-echo "Checking Network"
-#ping archlinux.org
+if -e /sys/firmware/efi/efivars
+then
+    echo "EFI enabled, continuing."
+else
+    echo "EFI not enable, halting script!" 
+    exit 
+fi
+echo "Checking network connectivity."
+if ping -c 1 192.168.1.4 &> /dev/null
+then   
+    echo "Internet Connectivity Working."
+else   
+    echo "No Internet Connectivity. Halting script!"
+    exit
+fi
+ping archlinux.org
 echo "Setting Time"
 #timedatectl set-ntp true
 #Drive Preparation
