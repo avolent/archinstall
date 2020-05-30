@@ -1,9 +1,10 @@
 #!/bin/bash
 echo Arch Installer
+read -n 1 -r -s -p $'Press enter to continue...\n'
 #Variables
 USERACC="will"
 DRIVE="sda"
-TIMEZONE="Sydney/Europe"
+TIMEZONE="Australia/Sydney"
 #Install Preparation
 echo "Starting Installation"
 echo "Checking EFI"
