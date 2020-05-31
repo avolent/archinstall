@@ -1,13 +1,15 @@
 #!/bin/bash
 echo -e "---- Arch Installer ----"
-read -p $'Click any key to continue.\n' continue
+printf 'press [ENTER] to continue deleting...'
+read _
 # Configuration
 USERACC="will"
 DEVICE="will-laptop" #Hostname of the device
 DRIVE="sda"
 TIMEZONE=/Australia/Sydney
 echo $TIMEZONE
-read -p $'Click any key to continue.\n' continue
+printf 'press [ENTER] to continue deleting...'
+read _
 # Install Preparation
 exit
 echo -e "\n---- Starting Installation ----"
