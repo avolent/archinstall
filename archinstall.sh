@@ -1,7 +1,7 @@
 #!/bin/bash
 echo Arch Installer
 read -n 1 -r -s -p $'Press enter to continue...\n'
-#Variables
+#
 USERACC="will"
 DRIVE="sda"
 TIMEZONE="Australia/Sydney"
