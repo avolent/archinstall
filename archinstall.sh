@@ -38,8 +38,7 @@ mkfs.fat -F32 /dev/${DRIVE}1
 mkfs.ext4 /dev/${DRIVE}2
 # Updating and syncing mirrorlist
 echo "---- Updating and syncing mirrorlist ----"
-pacman -Syy
-pacman -S reflector
+pacman --noconfirm -Syy reflector
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 # Installing Arch
