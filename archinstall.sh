@@ -1,15 +1,15 @@
 #!/bin/bash
 echo "---- Arch Installer ----"
 read -n 1 -r -s -p $'Press enter to continue...\n'
-# Variables
+# Configuration
 USERACC="will"
-HOSTNAME="will-laptop"
+DEVICE="will-laptop" #Hostname of the device
 DRIVE="sda"
 TIMEZONE="Australia/Sydney"
 # Install Preparation
-echo "---- Starting Installation ----"
+echo "---- Starting Installation ---- \n"
 timedatectl set-ntp true
-echo "---- Checking EFI ----"
+echo "---- Checking EFI ---- \n"
 if [ -d /sys/firmware/efi/efivars ]
     then
         echo "---- EFI enabled, continuing. ----"
@@ -17,12 +17,12 @@ if [ -d /sys/firmware/efi/efivars ]
         echo "!!!! EFI not enable, halting script !!!!" 
         exit 
 fi
-echo "---- Checking network connectivity. ----"
+echo "---- Checking network connectivity. ----\n"
 if ping -c 1 archlinux.org &> /dev/null
     then   
         echo "Internet Connectivity Working."
     else   
-        echo "No Internet Connectivity. Halting script!"
+        echo "!!!! No Internet Connectivity. Halting script !!!!"
         exit
 fi
 # Drive Preparation
@@ -37,27 +37,27 @@ parted -a opt /dev/$DRIVE mkpart primary 512 100%
 mkfs.fat -F32 /dev/${DRIVE}1
 mkfs.ext4 /dev/${DRIVE}2
 # Updating and syncing mirrorlist
-echo "---- Updating and syncing mirrorlist ----"
+echo "---- Updating and syncing mirrorlist ---- \n"
 pacman --noconfirm -Syy reflector
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 # Installing Arch
-echo "---- Installing Arch ----"
+echo "---- Installing Arch ---- \n"
 mount /dev/sda2 /mnt
 pacstrap /mnt base linux linux-firmware vim nano
 genfstab -U /mnt >> /mnt/etc/fstab
-echo "---- Chroot into Arch ----"
+echo "---- Chroot into Arch ---- \n"
 arch-chroot /mnt
-echo "---- Setting up Timezones ----"
+echo "---- Setting up Timezones ---- \n"
 timedatectl set-timezone $TIMEZONE
-echo "---- Configuring locale ----"
+echo "---- Configuring locale ---- \n"
 locale-gen
-echo LANG=en_AU.UTF-8 UTF-8 > /etc/locale.conf
-export LANG=en_AU.UTF-8 UTF-8
-echo "---- Configuring Hostname and Networking ----"
-echo $HOSTNAME > /etc/hostname
+echo LANG=en_AU.UTF-8 > /etc/locale.conf
+export LANG=en_AU.UTF-8
+echo "---- Configuring Hostname and Networking ---- \n"
+echo $DEVICE > /etc/hostname
 touch /etc/hosts
-echo -e '127.0.0.1  localhost\n::1  localhost\n127.0.1.1    '$HOSTNAME'' > /etc/hosts
-echo "---- Enter in root password ----"
+echo -e '127.0.0.1  localhost\n::1  localhost\n127.0.1.1    '$DEVICE'' > /etc/hosts
+echo "---- Enter in root password ---- \n"
 passwd
 echo "temp end"
