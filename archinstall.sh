@@ -8,7 +8,7 @@ TIMEZONE="Australia/Sydney"
 # Install Preparation
 echo "---- Starting Installation ----"
 echo "---- Checking EFI ----"
-if -d /sys/firmware/efi/efivars
+if [ -d /sys/firmware/efi/efivars ]
     then
         echo "---- EFI enabled, continuing. ----"
     else
@@ -16,7 +16,7 @@ if -d /sys/firmware/efi/efivars
         exit 
 fi
 echo "Checking network connectivity."
-if ping -c 1 archlinux.org &> /dev/null
+if [ ping -c 1 archlinux.org &> /dev/null ]
     then   
         echo "Internet Connectivity Working."
     else   
