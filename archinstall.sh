@@ -1,18 +1,18 @@
 #!/bin/bash
-echo Arch Installer
+echo "---- Arch Installer ----"
 read -n 1 -r -s -p $'Press enter to continue...\n'
-# tes
+# Variables
 USERACC="will"
 DRIVE="sda"
 TIMEZONE="Australia/Sydney"
 # Install Preparation
 echo "---- Starting Installation ----"
 echo "---- Checking EFI ----"
-if -e /sys/firmware/efi/efivars
+if -d /sys/firmware/efi/efivars
     then
-        echo "EFI enabled, continuing."
+        echo "---- EFI enabled, continuing. ----"
     else
-        echo "EFI not enable, halting script!" 
+        echo "!!!! EFI not enable, halting script !!!!" 
         exit 
 fi
 echo "Checking network connectivity."
