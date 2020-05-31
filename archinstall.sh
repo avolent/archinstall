@@ -1,16 +1,15 @@
 #!/bin/bash
 echo -e "---- Arch Installer ----"
-
+read -p $'Click any key to continue.\n' continue
 # Configuration
 USERACC="will"
 DEVICE="will-laptop" #Hostname of the device
 DRIVE="sda"
 TIMEZONE=/Australia/Sydney
 echo $TIMEZONE
-
-
-exit
+read -p $'Click any key to continue.\n' continue
 # Install Preparation
+exit
 echo -e "\n---- Starting Installation ----"
 timedatectl set-ntp true
 echo -e "\n---- Checking EFI ----"
