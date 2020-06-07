@@ -4,7 +4,7 @@ echo -e "---- Arch Installer ----"
 USERACC="will"
 DEVICE="will-laptop" #Hostname of the device
 DRIVE="sda"
-TIMEZONE=/Australia/Sydney
+TIMEZONE="/Australia/Sydney"
 echo "Edit the variables at the start of the script to adjust the install"
 printf 'press [ENTER] to continue deleting...'
 read _
