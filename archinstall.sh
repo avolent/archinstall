@@ -20,19 +20,12 @@ else
     echo "!!!! EFI not enable, halting script !!!!"
     exit
 fi
-echo -e "\n---- Checking network connectivity. ----"
-if ping -c 1 archlinux.org &> /dev/null
-then
-    echo "Internet Connectivity Working."
-else
-    echo "!!!! No Internet Connectivity. Halting script !!!!"
-    exit
-fi
 
 # Drive Preparation
 echo -e "\n---- Preparing drives and creating partitions ----"
-read -n 1 -r -s -p $'Selected drive is '$DRIVE'.\n
+printf 'Selected drive is '$DRIVE'.\n
 Press enter to continue...\n'
+read _
 dd if=/dev/zero of=/dev/$DRIVE  bs=512  count=1
 parted /dev/$DRIVE mklabel gpt
 parted -a opt /dev/$DRIVE mkpart primary fat32 2 512
@@ -49,7 +42,7 @@ reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 
 # Installing Arch
 echo -e "\n---- Installing Arch ----"
-mount /dev/sda2 /mnt
+mount /dev/${DRIVE}2 /mnt
 pacstrap /mnt base linux linux-firmware vim nano
 genfstab -U /mnt >> /mnt/etc/fstab
 echo -e "\n---- Chroot into Arch ----"
