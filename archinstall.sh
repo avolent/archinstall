@@ -1,15 +1,14 @@
 #!/bin/bash
 echo -e "---- Arch Installer ----"
-printf 'press [ENTER] to continue deleting...'
-read _
 # Configuration
 USERACC="will"
 DEVICE="will-laptop" #Hostname of the device
 DRIVE="sda"
 TIMEZONE=/Australia/Sydney
-echo $TIMEZONE
+echo "Edit the variables at the start of the script to adjust the install"
 printf 'press [ENTER] to continue deleting...'
 read _
+
 # Install Preparation
 exit
 echo -e "\n---- Starting Installation ----"
@@ -30,6 +29,7 @@ else
     echo "!!!! No Internet Connectivity. Halting script !!!!"
     exit
 fi
+
 # Drive Preparation
 echo -e "\n---- Preparing drives and creating partitions ----"
 read -n 1 -r -s -p $'Selected drive is '$DRIVE'.\n
@@ -41,11 +41,13 @@ parted /dev/$DRIVE set 1 esp on
 parted -a opt /dev/$DRIVE mkpart primary 512 100%
 mkfs.fat -F32 /dev/${DRIVE}1
 mkfs.ext4 /dev/${DRIVE}2
+
 # Updating and syncing mirrorlist
 echo -e "\n---- Updating and syncing mirrorlist ----"
 pacman --noconfirm -Syy reflector
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
+
 # Installing Arch
 echo -e "\n---- Installing Arch ----"
 mount /dev/sda2 /mnt
