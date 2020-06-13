@@ -8,24 +8,32 @@ DRIVE="sda"
 TIMEZONE="/Australia/Sydney"
 
 #Current Variable Check
-echo $USERACC
-echo $DEVICE
-echo $DRIVE
-echo $TIMEZONE
-echo "Edit the variables at the start of the script to adjust the install"
-printf 'press [ENTER] to continue deleting...'
-read _
+echo "---- Current Variables ----"
+echo "User Account: $USERACC"
+echo "Hostname: $DEVICE"
+echo "Drive: $DRIVE"
+echo -e "Timezone: $TIMEZONE \n"
+read -r -p "Are you happy with the current variables? [yes/no] " answer
+case "$answer" in
+    [yY][eE][sS]|[yY]) 
+        echo "---- Proceeding with script ----"
+        ;;
+    *)
+        echo "!!!! Edit the variables at the start of the script to adjust the install !!!!"
+        exit
+        ;;
+esac
 
 # Install Preparation
 echo -e "\n---- Starting Installation ----"
 timedatectl set-ntp true
 echo -e "\n---- Checking EFI ----"
-if [ -d /sys/firmware/efi/efivars ]
-then
-    echo "---- EFI enabled, continuing. ----"
-else
-    echo "!!!! EFI not enable, halting script !!!!"
-    exit
+if [[ -d /sys/firmware/efi/efivars ]]
+    then
+        echo "---- EFI enabled, continuing. ----"
+    else
+        echo "!!!! EFI not enable, halting script !!!!"
+        exit    
 fi
 
 # Drive Preparation
