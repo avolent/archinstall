@@ -38,8 +38,7 @@ fi
 
 # Drive Preparation
 echo -e "\n---- Preparing drives and creating partitions ----"
-printf 'Selected drive is '$DRIVE'.\n
-Press enter to continue...\n'
+printf 'Selected drive is '$DRIVE'.\n Press enter to continue...\n'
 read _
 dd if=/dev/zero of=/dev/$DRIVE  bs=512  count=1
 parted /dev/$DRIVE mklabel gpt
@@ -58,21 +57,13 @@ reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 # Installing Arch
 echo -e "\n---- Installing Arch ----"
 mount /dev/${DRIVE}2 /mnt
-pacstrap /mnt base linux linux-firmware vim nano
+pacstrap /mnt base linux linux-firmware vim nano zip unzip bash-completion
 genfstab -U /mnt >> /mnt/etc/fstab
+
+#Chrooting into Arch
 echo -e "\n---- Chroot into Arch ----"
-arch-chroot /mnt
-echo -e "\n---- Setting up Timezones ----"
-echo $TIMEZONE
-timedatectl set-timezone $TIMEZONE
-echo -e "\n---- Configuring locale ----"
-locale-gen
-echo LANG=en_AU.UTF-8 > /etc/locale.conf
-export LANG=en_AU.UTF-8
-echo -e "\n---- Configuring Hostname and Networking ----"
-echo $DEVICE > /etc/hostname
-touch /etc/hosts
-echo -e '127.0.0.1  localhost\n::1  localhost\n127.0.1.1    '$DEVICE'' > /etc/hosts
-echo -e "\n---- Enter in root password ----"
-passwd
-echo -e "\ntemp end"
+curl -sL url -o post-chroot.sh
+mkdir /mnt/scripts
+cp post-chroot.sh /mnt/scripts
+arch-chroot /mnt /scripts/post-chroot.sh
+
