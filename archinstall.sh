@@ -1,10 +1,17 @@
 #!/bin/bash
 echo -e "---- Arch Installer ----"
+
 # Configuration
 USERACC="will"
 DEVICE="will-laptop" #Hostname of the device
 DRIVE="sda"
 TIMEZONE="/Australia/Sydney"
+
+#Current Variable Check
+echo $USERACC
+echo $DEVICE
+echo $DRIVE
+echo $TIMEZONE
 echo "Edit the variables at the start of the script to adjust the install"
 printf 'press [ENTER] to continue deleting...'
 read _
