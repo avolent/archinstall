@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# Configuration
+USERACC="will"
+DEVICE="will-laptop" #Hostname of the device
+TIMEZONE="/Australia/Sydney"
+
+#Current Variable Check
+echo "---- Current Variables ----"
+echo "User Account: $USERACC"
+echo "Hostname: $DEVICE"
+echo -e "Timezone: $TIMEZONE \n"
+read -r -p "Are you happy with the current variables? [yes/no]: " ANSWER
+case "$ANSWER" in
+    [yY][eE][sS]|[yY]) 
+        echo "---- Proceeding with script ----"
+        ;;
+    *)
+        echo "!!!! Edit the variables at the start of the script to adjust the install !!!!"
+        exit
+        ;;
+esac
+
 # Configuring Arch
 echo -e "\n---- Setting up Timezones ----"
 echo $TIMEZONE
