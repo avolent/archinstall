@@ -18,7 +18,7 @@ echo -e "\n---- Preparing drives and creating partitions ----"
 lsblk
 DRIVE="sda"
 # while true ; do
-#     read -r -p "What drive would you like to partition? [sdx/nvmeXnX]: " DRIVE
+#     read -p "What drive would you like to partition? [sdx/nvmeXnX]: " DRIVE
 #         case "$DRIVE" in
 #             sd*|nvme*n*) 
 #                 echo -e "Selected drive is '$DRIVE', continue with enter..."
