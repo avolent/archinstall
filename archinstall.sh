@@ -26,6 +26,7 @@ while true ; do
                 ;;
             *)
                 echo "!!!! Try, again !!!!"
+                exit
                 ;;
         esac
 done
