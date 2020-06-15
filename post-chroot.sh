@@ -10,7 +10,7 @@ echo "---- Current Variables ----"
 echo "User Account: $USERACC"
 echo "Hostname: $DEVICE"
 echo "Timezone: $TIMEZONE"
-read -r -p "Are you happy with the current variables? [yes/no]: " ANSWER </dev/tty
+read -r -p "Are you happy with the current variables? [yes/no]: " ANSWER
 case "$ANSWER" in
     [yY][eE][sS]|[yY]) 
         echo "---- Proceeding with script ----"
