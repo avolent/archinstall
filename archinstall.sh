@@ -14,7 +14,8 @@ if [[ -d /sys/firmware/efi/efivars ]]
 fi
 
 # Drive Preparation
-echo -e "\n---- Preparing drives and creating partitions ----"
+echo -e ""
+echo -e "---- Preparing drives and creating partitions ----"
 lsblk
 DRIVE="sda"
 # while true ; do
