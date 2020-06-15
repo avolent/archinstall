@@ -48,13 +48,12 @@ reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 # Installing Arch
 echo -e "\n---- Installing Arch ----"
 mount /dev/${DRIVE}2 /mnt
-pacstrap /mnt base linux linux-firmware vim nano zip unzip bash-completion networkmanager yay
+pacstrap /mnt base linux linux-firmware vim nano zip unzip bash-completion networkmanager
 genfstab -U /mnt >> /mnt/etc/fstab
 
 #Chrooting into Arch
 echo -e "\n---- Chroot into Arch ----"
 curl -sL https://raw.githubusercontent.com/avolent/archinstall/master/post-chroot.sh -o post-chroot.sh
-chmod +x post-chroot.sh
 mkdir /mnt/scripts
 cp post-chroot.sh /mnt/scripts
 arch-chroot /mnt /scripts/post-chroot.sh
