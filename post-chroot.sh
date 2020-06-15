@@ -9,7 +9,7 @@ TIMEZONE="Australia/Sydney"
 echo "---- Current Variables ----"
 echo "User Account: $USERACC"
 echo "Hostname: $DEVICE"
-echo -e "Timezone: $TIMEZONE \n"
+echo -e "Timezone: $TIMEZONE"
 read -r -p "Are you happy with the current variables? [yes/no]: " ANSWER
 case "$ANSWER" in
     [yY][eE][sS]|[yY]) 
@@ -46,4 +46,4 @@ grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Installing packages 
-pacman -Syu yay light-dm rxvt-unicode ranger intel-ucode networkmanager nm-connection-editor network-manager-applet i3-gaps i3status i3lock dmenu i3-scrot i3exit
+pacman -Syu yay light-dm rxvt-unicode ranger networkmanager nm-connection-editor network-manager-applet i3-gaps i3status i3lock dmenu i3-scrot i3exit
