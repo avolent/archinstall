@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+# set -x
 
 # Configuration
 USERACC="will"
@@ -48,7 +48,19 @@ mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Installing packages 
+# Setting up Repositories
+sed -i '33s/^#//g' /etc/pacman.conf #Enable Color
+# sed -i '92s/^#//g' /etc/pacman.conf #32bit repos
+# sed -i '93s/^#//g' /etc/pacman.conf #32bit repos
+
+# Creating a user
+echo -e "\n---- Creating User ----"
+useradd -m $USERACC
+passwd $USERACC
+su will
+
+# Installing packages
+echo -e "\n---- Installing Packages ----"
 pacman -S git
 git clone https://aur.archlinux.org/yay.git
 cd yay
