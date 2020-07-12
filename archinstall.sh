@@ -1,11 +1,11 @@
 #!/bin/bash
-set -x
+# set -x
 
 echo -e "---- Arch Installer ----"
 
 # Install Preparation
 echo -e "\n---- Starting Installation ----"
-timedatectl set-ntp true &>/dev/null 
+# timedatectl set-ntp true &>/dev/null 
 echo -e "\n---- Checking EFI ----"
 if [[ -d /sys/firmware/efi/efivars ]]
     then
@@ -17,19 +17,18 @@ fi
 
 # Drive Preparation
 echo -e "---- Preparing drives and creating partitions ----"
-lsblk &>/dev/null 
+lsblk
 # DRIVE="sda"
-while true ; do
+while true; do
     read -p "What drive would you like to partition? [sdx/nvmeXnX]: " DRIVE
         case "$DRIVE" in
             sd*|nvme*n*) 
-                echo -e "Selected drive is '$DRIVE', continue with enter..."
-                read _
+                echo -e "Selected drive is '$DRIVE', continue with enter...";
+                read _;
                 break
                 ;;
             *)
                 echo "!!!! Try, again !!!!"
-                exit
                 ;;
         esac
 done
