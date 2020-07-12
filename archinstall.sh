@@ -30,7 +30,7 @@ while true; do
                 ;;
         esac
 done
-dd if=/dev/zero of=/dev/$DRIVE  bs=512  count=1
+dd if=/dev/zero of=/dev/$DRIVE bs=512 count=1
 parted /dev/$DRIVE mklabel gpt 
 parted -a opt /dev/$DRIVE mkpart primary fat32 2 512
 parted /dev/$DRIVE set 1 esp on 
