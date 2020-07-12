@@ -53,7 +53,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 #Chrooting into Arch
 echo -e "\n---- Chroot into Arch ----"
 curl -sL https://raw.githubusercontent.com/avolent/archinstall/master/post-chroot.sh -o post-chroot.sh 
+chmod +x post-chroot.sh
 mkdir /mnt/scripts 
 cp post-chroot.sh /mnt/scripts 
-chmod -x /mnt/scripts/post-chroot.sh 
 arch-chroot /mnt /scripts/post-chroot.sh
