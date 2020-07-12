@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Configuration
 USERACC="will"
@@ -22,6 +23,8 @@ case "$ANSWER" in
 esac
 
 # Configuring Arch
+echo -e "\n---- Enabling Network Manager ----"
+systemctl enable NetworkManager &>/dev/null
 echo -e "\n---- Setting up Timezones ----"
 echo $TIMEZONE
 timedatectl set-timezone $TIMEZONE
@@ -46,4 +49,5 @@ grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Installing packages 
-yay -Syu light-dm rxvt-unicode ranger networkmanager nm-connection-editor network-manager-applet i3-gaps i3status i3lock dmenu i3-scrot i3exit
+yay -Syu light-dm lightdm-gtk-greeter-settings rxvt-unicode ranger nm-connection-editor network-manager-applet i3-gaps i3status i3lock dmenu i3-scrot i3exit
+systemctl enable lightdm &>/dev/null

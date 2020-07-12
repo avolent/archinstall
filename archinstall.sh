@@ -1,4 +1,6 @@
 #!/bin/bash
+set -x
+
 echo -e "---- Arch Installer ----"
 
 # Install Preparation
@@ -48,7 +50,7 @@ reflector -c "Australia" -f 5 -l 5 -n 5 --save /etc/pacman.d/mirrorlist
 # Installing Arch
 echo -e "\n---- Installing Arch ----"
 mount /dev/${DRIVE}2 /mnt
-pacstrap /mnt base linux linux-firmware vim nano zip unzip bash-completion networkmanager
+pacstrap /mnt base linux linux-firmware vim nano zip unzip bash-completion networkmanager sudo openssh
 genfstab -U /mnt >> /mnt/etc/fstab
 
 #Chrooting into Arch
