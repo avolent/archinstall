@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -x
+set -x
 
 # Configuration
 USERACC="will"
@@ -57,7 +57,7 @@ sed -i '33s/^#//g' /etc/pacman.conf #Enable Color
 echo -e "\n---- Creating User ----"
 useradd -m $USERACC
 passwd $USERACC
-su will
+# su will
 
 # Installing packages
 echo -e "\n---- Installing Packages ----"
